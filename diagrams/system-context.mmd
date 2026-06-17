@@ -1,0 +1,19 @@
+flowchart LR
+  User["Learner"]
+  Admin["Operator / Admin"]
+  Mobile["CVocab Mobile App<br/>Flutter"]
+  Web["CVocab Web<br/>Next.js"]
+  BO["Backoffice<br/>Next.js"]
+  API["CVocab API<br/>NestJS"]
+  Pipeline["Data Processing<br/>Python"]
+  Providers["External Providers<br/>auth, notification, email,<br/>payments"]
+
+  User --> Mobile
+  User --> Web
+  Admin --> BO
+  Mobile --> API
+  Web --> API
+  BO --> API
+  Pipeline --> API
+  API --> Providers
+  Pipeline --> Providers

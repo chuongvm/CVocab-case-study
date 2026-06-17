@@ -1,0 +1,24 @@
+sequenceDiagram
+  autonumber
+  actor Learner
+  participant App as Mobile/Web client
+  participant API as NestJS API
+  participant Cache as Redis cache
+  participant DB as PostgreSQL
+  participant Queue as BullMQ queue
+  participant Worker as Background worker
+  participant Provider as External provider
+
+  Learner->>App: Starts a learning or review action
+  App->>API: Sends authenticated request
+  API->>API: Validate DTO, auth, locale, permissions
+  API->>Cache: Read cached metadata when available
+  Cache-->>API: Cache hit or miss
+  API->>DB: Read/write product data
+  DB-->>API: Persisted result
+  API->>Queue: Enqueue async side effects when needed
+  API-->>App: Return user-facing response
+  Queue-->>Worker: Deliver job
+  Worker->>DB: Update state or audit metadata
+  Worker->>Provider: Send notification/email/webhook when needed
+  Provider-->>Worker: Provider result

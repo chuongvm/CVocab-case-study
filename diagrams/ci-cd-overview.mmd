@@ -1,0 +1,34 @@
+flowchart LR
+  subgraph Repos["Private repositories with CI/CD"]
+    Mobile["Flutter app"]
+    API["NestJS API"]
+    Web["Next.js web"]
+    BO["Next.js backoffice"]
+    Data["Python data jobs"]
+  end
+
+  subgraph Gates["Quality gates"]
+    Install["Install dependencies"]
+    Static["Lint / type checks"]
+    Tests["Unit / integration tests"]
+    Build["Build artifact"]
+    Verify["Smoke or manual verification"]
+  end
+
+  subgraph Targets["Release targets"]
+    Stores["Mobile store release"]
+    APIProd["Backend deployment"]
+    WebProd["Web deployment"]
+    BOProd["Backoffice deployment"]
+    Jobs["Data job runtime"]
+  end
+
+  Mobile --> Install --> Static --> Tests --> Build --> Stores
+  API --> Install
+  Build --> APIProd
+  Web --> Install
+  Build --> WebProd
+  BO --> Install
+  Build --> BOProd
+  Data --> Install
+  Verify --> Jobs

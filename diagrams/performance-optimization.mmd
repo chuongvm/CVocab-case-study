@@ -1,0 +1,17 @@
+flowchart LR
+  HotPath["Critical API flows<br/>review, search, results,<br/>bulk update, auth"]
+  Measure["Measure with k6<br/>smoke, load, stress"]
+  Query["Review query shape<br/>filters, joins, sorting,<br/>pagination, payload size"]
+  Index["Add database indexes<br/>for frequent access patterns"]
+  Cache["Add Redis cache<br/>for stable or repeated reads"]
+  Worker["Move slow side effects<br/>to BullMQ workers"]
+  Iterate["Compare results<br/>and iterate"]
+
+  HotPath --> Measure --> Query
+  Query --> Index
+  Query --> Cache
+  Query --> Worker
+  Index --> Iterate
+  Cache --> Iterate
+  Worker --> Iterate
+  Iterate --> Measure

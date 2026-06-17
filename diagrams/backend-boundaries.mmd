@@ -1,0 +1,28 @@
+flowchart TB
+  subgraph Clients
+    Mobile["Mobile app"]
+    Web["Web app"]
+    BO["Backoffice"]
+  end
+
+  subgraph API["NestJS API Boundary"]
+    FE["User-facing modules<br/>auth, account, learning,<br/>review, search, result,<br/>subscription, notification"]
+    Admin["Admin modules<br/>content, users, orders,<br/>promotions, versions,<br/>queues, operations"]
+    Common["Common platform layer<br/>auth, RBAC, validation,<br/>i18n, cache, Prisma,<br/>Swagger, filters, guards"]
+  end
+
+  subgraph Runtime
+    DB[("PostgreSQL")]
+    Redis[("Redis")]
+    Workers["Workers"]
+  end
+
+  Mobile --> FE
+  Web --> FE
+  BO --> Admin
+  FE --> Common
+  Admin --> Common
+  Common --> DB
+  Common --> Redis
+  Redis --> Workers
+  Workers --> DB

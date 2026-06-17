@@ -1,0 +1,10 @@
+flowchart LR
+  Inputs["Private/internal inputs"]
+  Prepare["Prepare"]
+  Validate["Validate"]
+  Transform["Transform"]
+  Review["Review output"]
+  Import["Controlled import/export"]
+  DB[("Product database")]
+
+  Inputs --> Prepare --> Validate --> Transform --> Review --> Import --> DB

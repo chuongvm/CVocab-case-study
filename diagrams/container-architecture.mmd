@@ -1,0 +1,30 @@
+flowchart LR
+  subgraph Clients
+    Mobile["Flutter mobile app"]
+    Web["Next.js web app"]
+    BO["Next.js backoffice"]
+  end
+
+  subgraph Backend
+    API["NestJS API<br/>User + Admin APIs"]
+    Workers["BullMQ workers"]
+  end
+
+  subgraph Storage
+    DB[("PostgreSQL")]
+    Redis[("Redis")]
+  end
+
+  Pipeline["Python data pipeline"]
+  K6["k6 performance tests"]
+
+  Mobile --> API
+  Web --> API
+  BO --> API
+  API <--> DB
+  API <--> Redis
+  API --> Redis
+  Redis --> Workers
+  Workers --> DB
+  Pipeline --> DB
+  K6 --> API

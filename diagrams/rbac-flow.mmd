@@ -1,0 +1,15 @@
+flowchart LR
+  Request["Request"]
+  Auth["Authenticate user"]
+  Roles["Resolve roles"]
+  Permissions["Resolve permissions"]
+  Guard["Route/module guard"]
+  Allow["Allow operation"]
+  Deny["Deny safely"]
+  Audit["Optional audit/log signal"]
+
+  Request --> Auth --> Roles --> Permissions --> Guard
+  Guard --> Allow
+  Guard --> Deny
+  Allow --> Audit
+  Deny --> Audit

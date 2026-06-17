@@ -1,0 +1,19 @@
+flowchart LR
+  Smoke["Smoke tests"]
+  Load["Load tests"]
+  Stress["Stress tests"]
+  Spike["Spike tests"]
+  Endurance["Endurance tests"]
+  Public["Public scenarios"]
+  Auth["Authenticated scenarios"]
+  API["NestJS API"]
+  Reports["Run reports<br/>redacted before sharing"]
+
+  Smoke --> Public
+  Load --> Public
+  Stress --> Auth
+  Spike --> Auth
+  Endurance --> Public
+  Public --> API
+  Auth --> API
+  API --> Reports

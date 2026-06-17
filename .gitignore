@@ -1,0 +1,29 @@
+.DS_Store
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p8
+*.p12
+*.jks
+*.keystore
+*service-account*.json
+*firebase*.json
+*google-services*.json
+GoogleService-Info.plist
+
+# Private source or generated output
+node_modules/
+.next/
+build/
+dist/
+.dart_tool/
+coverage/
+results/
+
+# Keep only redacted/public screenshots in git.
+screenshots/raw/
+screenshots/private/

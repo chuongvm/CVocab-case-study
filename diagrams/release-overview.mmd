@@ -1,0 +1,33 @@
+flowchart LR
+  subgraph PrivateRepos["Private repositories"]
+    Mobile["Flutter cv-app"]
+    API["NestJS cv-api"]
+    Web["NextJS cv-web"]
+    BO["NextJS cv-bo"]
+    Data["Python cv-data"]
+    Tests["Load test cv-be-test"]
+  end
+
+  subgraph QualityGates["Quality gates"]
+    Static["Lint / type checks"]
+    Unit["Unit / integration tests"]
+    Build["Build artifacts"]
+    Smoke["Smoke tests"]
+    Perf["k6 performance checks"]
+    Review["Manual release review"]
+  end
+
+  subgraph Production["Production surfaces"]
+    Stores["iOS / Android stores"]
+    WebProd["Public web"]
+    APIProd["Backend services"]
+    AdminProd["Backoffice"]
+    PipelineOps["Data jobs"]
+  end
+
+  Mobile --> Static --> Unit --> Build --> Review --> Stores
+  API --> Static --> Unit --> Build --> Smoke --> Perf --> APIProd
+  Web --> Static --> Unit --> Build --> WebProd
+  BO --> Static --> Unit --> Build --> AdminProd
+  Data --> Review --> PipelineOps
+  Tests --> Perf

@@ -1,0 +1,18 @@
+flowchart LR
+  Mobile["Mobile app<br/>crash + analytics signals"]
+  Web["Web app<br/>usage + errors"]
+  API["Backend API<br/>logs + errors + latency"]
+  Workers["Workers<br/>job success/failure"]
+  K6["k6 reports<br/>latency + error rate"]
+  Backoffice["Backoffice<br/>ops visibility"]
+  Decisions["Engineering decisions<br/>fix, optimize, retry,<br/>defer, or redesign"]
+
+  Mobile --> Decisions
+  Web --> Decisions
+  API --> Decisions
+  Workers --> Decisions
+  K6 --> Decisions
+  Backoffice --> Decisions
+  Decisions --> Mobile
+  Decisions --> API
+  Decisions --> Workers

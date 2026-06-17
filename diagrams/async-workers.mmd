@@ -1,0 +1,28 @@
+flowchart LR
+  API["NestJS API"]
+  Redis[("Redis / BullMQ")]
+  Email["Email worker"]
+  Image["Image worker"]
+  Scheduler["Scheduler worker"]
+  Webhook["Webhook worker"]
+  Notification["Notification worker"]
+  Review["Review computation worker"]
+  Account["Account deletion worker"]
+  DB[("PostgreSQL")]
+  Providers["External providers"]
+
+  API --> Redis
+  Redis --> Email
+  Redis --> Image
+  Redis --> Scheduler
+  Redis --> Webhook
+  Redis --> Notification
+  Redis --> Review
+  Redis --> Account
+  Email --> Providers
+  Image --> DB
+  Scheduler --> DB
+  Webhook --> Providers
+  Notification --> Providers
+  Review --> DB
+  Account --> DB
